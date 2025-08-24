@@ -2,3 +2,7 @@
 z_environment
 __init__.py
 migrations
+auth_needs_read
+__pycache__
+db.sqlite3
+updates_TO_DO.txt

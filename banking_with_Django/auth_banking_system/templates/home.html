@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1>Welcome to XYZ Bank</h1>
+<p>
+  Experience modern, secure, and convenient banking at your fingertips.  
+  Whether you want to manage your accounts, transfer money, or apply for a loan –  
+  everything is just a click away.
+</p>
+
+<hr>
+
+<h2>✨ Our Features</h2>
+<ul>
+  <li><strong>Secure Login:</strong> Multi-layer authentication to protect your data.</li>
+  <li><strong>Easy Transactions:</strong> Transfer money instantly to any account.</li>
+  <li><strong>Account Management:</strong> View balances, statements, and history.</li>
+  <li><strong>Loan Services:</strong> Apply for personal, housing, or education loans online.</li>
+  <li><strong>Customer Support:</strong> 24/7 help whenever you need it.</li>
+</ul>
+
+<hr>
+
+<h2>🚀 Why Choose XYZ Bank?</h2>
+<p>
+  ✅ Trusted by thousands of customers across India. <br>
+  ✅ Built with advanced encryption for safe online banking. <br>
+  ✅ Simple, user-friendly interface for hassle-free use. <br>
+  ✅ Available anytime, anywhere – just log in and bank on the go.
+</p>
+
+<hr>
+
+<h2>🖊️ Get Started</h2>
+<p>
+  New here? <a href="{% url 'signup' %}">Create an account</a> and explore.  
+  Already a customer? <a href="{% url 'signin' %}">Login</a> to manage your account.  
+</p>
+
+<img src="/static/images/bank_home_banner.jpg" alt="Banking Made Simple" style="width:100%; border-radius:12px; margin-top:20px;">
+
+
+{% endblock %}

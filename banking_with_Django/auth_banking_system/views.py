@@ -16,6 +16,7 @@ def signup(request):
             username=request.POST['username'],
             password=request.POST['password'],
         )
+        return redirect('signin')
     return render(request,'Signup.html')
 
 ############# USER LOGIN PAGE ##################. 2
@@ -27,15 +28,16 @@ def signin(request):
         )
         if user:
             login(request,user)
-            return redirect('signup')
+            messages.success(request,"Login Successfully")
+            return redirect('profile')
     return render(request,'signin.html')
 
 ############# USER LOGOUT PAGE ##################. 3
 
 def logout_user(request):
     logout(request)
-    return redirect('signin') ##### YOU HAVE TO WORK WITH IT #####
-
+    messages.success(request, "Logout successfully")
+    return redirect('home') ##### YOU HAVE TO WORK WITH IT #####
 
 
 
@@ -65,3 +67,60 @@ def contact(request):
     else:
         form = ContactForm()
     return render(request,'contact_us.html',{'form':form})
+
+
+###################### REST PASSWORD ON LOGIN PAGE###########################
+# def reset_password_withour_login(request):
+#     if request.method == 'POST':
+#         email = email.POST.get('email')
+#         new_password = request.POST['new_password']
+
+#         try:
+#             user = User.objects.get(email = email)
+#             new_password = user.set_password(new_password)
+#             user.save()
+#             messages.success(request,"Meassage successfully changed")
+#             return redirect('login')
+#         except User.DoesNotExist:
+#             messages.error(request,"user with this mail does not exist")
+#             return redirect('login_forget')
+
+def reset_password_without_login(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        new_password = request.POST.get('new_password')
+
+        try:
+            user = User.objects.get(email=email)   # find user
+            user.set_password(new_password)        # update password
+            user.save()
+            messages.success(request, "Password successfully changed")
+            return redirect('signin')  # go to login page
+        except User.DoesNotExist:
+            messages.error(request, "User with this email does not exist")
+            return redirect('forger_password_login_page')
+
+    # 👇 This handles GET request → just show form
+    return render(request, 'forger_password_login_page.html')
+
+
+###################### FORGET PASSWORD ###########################
+
+# def changepassword(request):
+#     if request.method == 'POSt':
+#         user = request.user
+#         old_password = request.POST['old_password']
+#         new_password = request.POST['new_password']
+#         confirm_password = request.POST['confirm_password']
+#         if not user.check_password(old_password):
+#             messages.error(request,"Old Password is not correct")
+#         elif new_password != confirm_password:
+#             messages.error(request,"New Password and Current password does not match")
+#         else:
+#             if request.method == 'POST':
+#                 user.set_password(new_password)
+#                 user.save()
+#                 update_session_auth_hash(request,user)
+#                 messages.success(request,"Password is Changed")
+#                 return redirect('signin')
+#     return render(request,'update_password.html')

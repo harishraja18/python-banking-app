@@ -10,8 +10,34 @@
 <body>
     {% include 'nav.html' %}
     <center>
+
+        <!-- Message POPUP -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {{ message.tags }} flash-message">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <!--  -->
+
+
+
         {% block content %}
+            <!-- page content -->
         {% endblock %}
+
+
+
+        <!-- java script -->
+        <script>
+            setTimeout(function(){ 
+                let flashes = document.querySelectorAll('.flash-message');
+                flashes.forEach(f => f.style.display = 'none');
+            }, 2000);
+        </script>
+        <!--  -->
+
     </center>
 </body>
 </html>

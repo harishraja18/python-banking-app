@@ -1,9 +1,18 @@
-
+{% if user.is_authenticated %}
+    <a href="{% url 'home' %}"><button>Home</button></a>
+    <a href="{% url 'home' %}"><button>My Profile</button></a>
+    <a href="{% url 'home' %}"><button>Accounts</button></a>
+    <a href="{% url 'home' %}"><button>Transactions</button></a>
+    <a href="{% url 'home' %}"><button>Services</button></a>
+    <a href="{% url 'home' %}"><button>Contact</button></a>
+    <a href="{% url 'logout' %}"><button>Logout</button></a>
+{% else %}
     <a href="{% url 'home' %}"><button>Home</button></a>
     <a href="{% url 'about_us' %}"><button>About Us</button></a>
     <a href="{% url 'contact' %}"><button>Contact Us</button></a>
     <a href="{% url 'signup' %}"><button>Signup</button></a>
     <a href="{% url 'signin' %}"><button>Login</button></a>
+{% endif %}
 <br>
 <br>
 <hr>

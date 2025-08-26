@@ -7,4 +7,6 @@ urlpatterns = [
     path('about/',this_is_auth.about, name='about_us'),
     path('signin/',this_is_auth.signin, name='signin'),
     path('signup/',this_is_auth.signup, name='signup'),
+    path('login_forget/',this_is_auth.reset_password_without_login, name='login_forget'),
+    path('logout/',this_is_auth.logout_user, name='logout')
 ]

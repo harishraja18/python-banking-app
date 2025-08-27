@@ -106,21 +106,20 @@ def reset_password_without_login(request):
 
 ###################### FORGET PASSWORD ###########################
 
-# def changepassword(request):
-#     if request.method == 'POSt':
-#         user = request.user
-#         old_password = request.POST['old_password']
-#         new_password = request.POST['new_password']
-#         confirm_password = request.POST['confirm_password']
-#         if not user.check_password(old_password):
-#             messages.error(request,"Old Password is not correct")
-#         elif new_password != confirm_password:
-#             messages.error(request,"New Password and Current password does not match")
-#         else:
-#             if request.method == 'POST':
-#                 user.set_password(new_password)
-#                 user.save()
-#                 update_session_auth_hash(request,user)
-#                 messages.success(request,"Password is Changed")
-#                 return redirect('signin')
-#     return render(request,'update_password.html')
+def changepassword(request):
+    if request.method == 'POST':
+        user = request.user
+        old_password = request.POST['old_password']
+        new_password = request.POST['new_password']
+        confirm_password = request.POST['confirm_password']
+        if not user.check_password(old_password):
+            messages.error(request,"Old Password is not correct")
+        elif new_password != confirm_password:
+            messages.error(request,"New Password and Current password does not match")
+        else:
+            user.set_password(new_password)
+            user.save()
+            update_session_auth_hash(request,user)
+            messages.success(request,"Password is Changed")
+            return redirect('logout')
+    return render(request,'changepassword.html')
